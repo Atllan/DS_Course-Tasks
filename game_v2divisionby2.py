@@ -14,18 +14,20 @@ def predict(number: int = 1) -> int:
     Returns:
         int: Число попыток
     """
-    count = 0
+    
     val_max = 101
     val_min = 0
-    predict_number = 50  # предполагаемое число
+    predict_number = (val_max-val_min) // 2  # Предполагаемое число, начинаем с середины диапазона
+    count = 1  # Принимаю за единицу, потому что по сути, определение середины диапазона уже является первой попыткой
+    
     while True:
         count += 1
         if number > predict_number:
             val_min = predict_number
-            predict_number = (val_max - val_min) // 2 + val_min
+            predict_number = (val_max-val_min) // 2 + val_min
         elif number < predict_number:
             val_max = predict_number
-            predict_number = (val_max - val_min) // 2 + val_min
+            predict_number = (val_max-val_min) // 2 + val_min
         elif number == predict_number:
             break  # выход из цикла если угадали
     return count
